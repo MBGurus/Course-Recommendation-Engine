@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .logo {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .btn-submit {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .disabled {
+            opacity: 0.5;
+        }
+    </style>
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+    </div>
+
+    <h2>Tell us about yourself</h2>
+
+    <form method="POST" action="submit_form.php"> <!-- Add method and action attributes -->
+
+        <!-- Personal Information -->
+        <div class="section">
+            <h3>1. Personal Information</h3>
+            <label>Grade Level?</label>
+            <input type="radio" name="grade_level" value="9" onclick="toggleSections()"> Grade 9  <br>
+            <input type="radio" name="grade_level" value="12" onclick="toggleSections()"> Grade 12
+        </div>
+
+        <!-- Interests and Hobbies -->
+        <div class="section">
+            <h3>2. Interests and Hobbies</h3>
+            <label>What subjects or activities do you enjoy the most at school?</label>
+            <input type="text" name="subjects_activities">
+
+            <label>What are your hobbies or interests outside of school?</label>
+            <input type="text" name="hobbies_interests">
+
+            <label>Which of the following areas are you interested in?</label>
+            <select name="interest_area">
+                <option>Science (Biology, Chemistry, Physics)</option>
+                <option>Mathematics</option>
+                <option>Technology and Computers</option>
+                <option>Arts and Design</option>
+                <option>Languages and Literature</option>
+                <option>Business and Economics</option>
+                <option>Social Sciences (History, Geography, Sociology)</option>
+                <option>Sports and Physical Education</option>
+            </select>
+        </div>
+
+        <!-- Personality and Learning Style -->
+        <div class="section">
+            <h3>3. Personality and Learning Style</h3>
+            <label>How would you describe your learning style?</label>
+            <input type="checkbox" name="learning_style[]" value="visual"> Visual    <br>
+            <input type="checkbox" name="learning_style[]" value="auditory"> Auditory  <br>
+            <input type="checkbox" name="learning_style[]" value="kinesthetic"> Kinesthetic  <br>
+            <input type="checkbox" name="learning_style[]" value="reading_writing"> Reading/Writing
+
+            <label>How do you prefer working on school projects?</label>
+            <input type="radio" name="work_preference" value="independent"> Working independently <br>
+            <input type="radio" name="work_preference" value="group"> Working in a group or team
+        </div>
+
+        <!-- Academic Goals and Aspirations -->
+        <div class="section">
+            <h3>4. Academic Goals and Aspirations</h3>
+            <label>For Grade 9 Students:</label>
+            <label>What subjects are you considering for Grade 10?</label>
+            <textarea name="subjects_for_grade_10" id="grade9_section" disabled></textarea>
+
+            <label>What is your main goal for choosing these subjects?</label>
+            <input type="checkbox" name="goal_career_path"> Preparing for a specific career path    <br>
+            <input type="checkbox" name="goal_exploration"> Exploring different subjects before deciding <br>
+            <input type="checkbox" name="goal_interest"> Choosing subjects I find interesting and enjoyable
+
+            <label>For Grade 12 Students:</label>
+            <label>What career path or profession are you interested in?</label>
+            <input type="text" name="career_interest" id="grade12_career_interest" disabled>
+
+            <label>What university degree or program are you considering?</label>
+            <input type="text" name="university_program" id="grade12_university_program" disabled>
+
+            <label>Which subjects do you excel in or enjoy the most?</label>
+            <textarea name="subjects_excellence" id="grade12_subjects_excellence" disabled></textarea>
+
+            <label>What are your main goals after high school?</label>
+            <input type="checkbox" name="goal_education"> Pursue higher education (university or college) <br>
+            <input type="checkbox" name="goal_skills"> Gain skills for a specific job or career <br>
+            <input type="checkbox" name="goal_business"> Start my own business or project <br>
+            <input type="checkbox" name="goal_explore"> Explore different opportunities before deciding
+        </div>
+
+        <!-- Subject Preferences and Strengths -->
+        <div class="section">
+            <h3>5. Subject Preferences and Strengths</h3>
+            <label>Which subjects are you currently studying?</label>
+            <input type="text" name="current_subjects">
+
+            <label>Which subjects do you find challenging?</label>
+            <textarea name="challenging_subjects"></textarea>
+
+            <label>Which subjects are you most confident in?</label>
+            <textarea name="confident_subjects"></textarea>
+
+            <label>If you could design your ideal course, what would it focus on?</label>
+            <input type="text" name="ideal_course">
+
+            <label>Do you prefer theoretical or practical subjects?</label>
+            <input type="radio" name="subject_preference" value="theoretical"> Theoretical <br>
+            <input type="radio" name="subject_preference" value="practical"> Practical
+        </div>
+
+        <!-- University and Career Planning (For Grade 12) -->
+        <div class="section">
+            <h3>6. University and Career Planning (For Grade 12)</h3>
+            <label>Have you researched any universities or courses yet?</label>
+            <input type="radio" name="researched_universities" value="yes"> Yes  <br>
+            <input type="radio" name="researched_universities" value="no"> No
+
+            <label>If yes, what are your top university choices?</label>
+            <textarea name="top_universities" id="grade12_top_universities" disabled></textarea>
+
+            <label>What criteria are most important to you when choosing a university or course?</label>
+            <input type="checkbox" name="criteria_reputation"> Reputation and ranking <br>
+            <input type="checkbox" name="criteria_course_content"> Course content and specialization <br>
+            <input type="checkbox" name="criteria_location"> Location <br>
+            <input type="checkbox" name="criteria_financial_aid"> Financial aid and scholarships <br>
+            <input type="checkbox" name="criteria_campus_life"> Campus life and extracurriculars
+        </div>
+
+        <!-- Future Plans and Vision -->
+        <div class="section">
+            <h3>7. Future Plans and Vision</h3>
+            <label>What are your long-term career goals?</label>
+            <textarea name="career_goals"></textarea>
+
+            <label>What kind of impact or contribution do you want to make in the future?</label>
+            <textarea name="future_impact"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    function toggleSections() {
+        var grade9Fields = document.getElementById('grade9_section');
+        var grade12Fields = [
+            document.getElementById('grade12_career_interest'),
+            document.getElementById('grade12_university_program'),
+            document.getElementById('grade12_subjects_excellence'),
+            document.getElementById('grade12_top_universities')
+        ];
+
+        var grade9Selected = document.querySelector('input[name="grade_level"]:checked')?.value === '9';
+
+        grade9Fields.disabled = !grade9Selected;
+        grade12Fields.forEach(function(field) {
+            field.disabled = grade9Selected;
+        });
+
+        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+            if (grade9Selected && checkbox.name.includes('grade12')) {
+                checkbox.disabled = true;
+            } else if (!grade9Selected && checkbox.name.includes('grade9')) {
+                checkbox.disabled = true;
+            } else {
+                checkbox.disabled = false;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
