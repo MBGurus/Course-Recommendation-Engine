@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Recommendation Engine</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Course Recommendation Engine Logo" />
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="aboutus.html">What we do</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="contact.html">Contact</a></li>
+               
+            </ul>
+        </nav>
+    </header>
+
+    <div class="dashboard">
+        <div class="profile-section">
+            <img id="profileImage" src="dashboard-defaultPic.png" alt="Profile Picture" class="profile-pic" onclick="document.getElementById('uploadImage').click();">
+            <input type="file" id="uploadImage" accept="image/*" style="display: none;">
+        </div>
+
+        <h1>Welcome, <span id="username">USERNAME</span></h1>
+
+        <div class="report-box">
+            <p>Here is your Report.</p>
+        </div>
+
+        <div class="buttons">
+            <button id="regenerate">Regenerate</button>
+            <button id="regenerateNew">Regenerate with New Info</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
