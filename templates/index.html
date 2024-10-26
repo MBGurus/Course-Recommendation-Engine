@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Recommendation</title>
+    <script>
+        function suggestNextWord() {
+            const input = document.getElementById("preferences").value;
+            fetch('/predict_next_word', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: input })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("suggestion").innerHTML = "Next Word Suggestions: " + data.next_words.join(', ');
+            });
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #007BFF;
+            border-radius: 8px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus, select:focus {
+            border-color: #0056b3;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        #suggestion {
+            color: #007BFF;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            input[type="submit"] {
+                padding: 12px 0;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Course Recommendation Engine</h1>
+        
+        <form action="/recommend" method="post">
+            <label for="preferences">Describe your ideal course (topics, skills, etc.):</label>
+            <textarea id="preferences" name="preferences" rows="4" onkeyup="suggestNextWord()" required></textarea>
+        
+            <label for="skill_level">Select Your Skill Level:</label>
+            <select name="skill_level" id="skill_level" required>
+                <option value="all">All Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="expert">Expert</option>
+            </select>
+    
+            <span id="suggestion"></span>
+            <input type="submit" value="Get Recommendations">
+        </form>
+    </div>
+
+</body>
+</html>
