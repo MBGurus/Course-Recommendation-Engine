@@ -1,0 +1,164 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hey", "How are you", "Is anyone there?", "Hello", "Good day"],
+      "responses": ["Hey :-)", "Hello, thanks for visiting", "Hi there, what can I do for you?", "Hi there, how can I help?"]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye"],
+      "responses": ["See you later, thanks for visiting", "Have a nice day", "Bye! Come back again soon."]
+    },
+    {
+      "tag": "platform_information",
+      "patterns": ["Which platform offers courses?", "Where can I find finance courses?", "Do you have courses on Udemy?", "What platforms do you use?", "Udemy finance courses"],
+      "responses": ["Some of the platforms offering courses include Udemy. For example, you can find courses like 'How To Maximize Your Profits Trading Options' on Udemy."]
+    },
+    {
+      "tag": "course_category",
+      "patterns": ["What business finance courses do you have?", "Show me business finance courses", "Finance courses", "Financial modeling courses", "Courses for financial analysts", "Business finance", "Financial analysis courses"],
+      "responses": ["Here are some courses on Business Finance:\n- Complete GST Course & Certification\n- Financial Modeling for Business Analysts\n- Beginner to Pro - Financial Analysis in Excel"]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+      "responses": ["Happy to help!", "Any time!", "My pleasure"]
+    },
+    {
+      "tag": "course_information",
+      "patterns": ["Tell me about investment banking courses", "Do you have courses on investment banking?", "Investment banking course", "Ultimate investment banking course", "Which platform offers investment banking?", "Investment banking Udemy"],
+      "responses": ["The Ultimate Investment Banking Course is available on Udemy. You can find it here: https://www.udemy.com/ultimate-investment-banking-course/"]
+    },
+    {
+      "tag": "penny_stocks",
+      "patterns": ["Penny stock trading", "Courses on penny stocks", "How to trade penny stocks?", "Penny stocks for beginners", "Trading penny stocks course", "Investing in penny stocks"],
+      "responses": ["The 'Trading Penny Stocks: A Guide for All Levels' course is available on Udemy. It's a great resource for learning how to trade penny stocks."]
+    },
+    {
+      "tag": "beginner_finance_courses",
+      "patterns": ["Finance courses for beginners", "Beginner finance course", "How to start learning finance?", "Introductory finance course", "Finance courses for newbies", "Best finance courses for beginners"],
+      "responses": ["Here are some beginner-level finance courses:\n- Beginner to Pro - Financial Analysis in Excel\n- Financial Modeling for Business Analysts"]
+    },
+    {
+      "tag": "excel_finance_courses",
+      "patterns": ["Excel for financial analysis", "Finance in Excel course", "Courses for finance using Excel", "Financial modeling in Excel", "Excel finance analysis", "Best Excel finance course"],
+      "responses": ["'Beginner to Pro - Financial Analysis in Excel' is perfect for learning finance with Excel."]
+    },
+    {
+      "tag": "trading_course",
+      "patterns": ["Trading courses", "Stock market trading course", "How to trade stocks?", "Courses for trading", "Best trading course", "Trading basics"],
+      "responses": ["'Trading Penny Stocks: A Guide for All Levels' or 'How To Maximize Your Profits Trading Options' are great courses for starting your trading journey."]
+    },
+    {
+      "tag": "course_certification",
+      "patterns": ["Do the courses provide certification?", "Will I get certified?", "Certification after course?", "Which courses offer certification?", "Certificate courses", "Certified finance courses"],
+      "responses": ["Yes, courses like the 'Complete GST Course & Certification' offer certifications upon completion."]
+    },
+    {
+      "tag": "udemy_courses",
+      "patterns": ["Udemy courses", "What courses are available on Udemy?", "Best courses on Udemy", "Show me Udemy courses", "Udemy finance courses", "Courses on Udemy"],
+      "responses": ["Here are some top Udemy courses:\n- Ultimate Investment Banking Course\n- Complete GST Course & Certification\n- How To Maximize Your Profits Trading Options"]
+    },
+    {
+      "tag": "advanced_courses",
+      "patterns": ["Advanced finance courses", "Finance courses for professionals", "What advanced finance courses are available?", "Professional-level finance courses", "Advanced financial analysis", "Courses for finance professionals"],
+      "responses": ["Advanced courses include 'Financial Modeling for Business Analysts' and 'How To Maximize Your Profits Trading Options'."]
+    },
+    {
+      "tag": "gst_certification",
+      "patterns": ["Is there a GST certification?", "Can I get certified in GST?", "GST certification courses", "GST certification training", "Certification for GST course", "Get GST certified"],
+      "responses": ["Yes, the 'Complete GST Course & Certification' provides certification upon completion."]
+    },
+    {
+      "tag": "stock_market_courses",
+      "patterns": ["Stock market courses", "Learn stock market", "Stock market basics course", "Courses on stock trading", "Stock market training", "Stock market learning course"],
+      "responses": ["Courses like 'Trading Penny Stocks: A Guide for All Levels' will help you learn stock trading."]
+    },
+    {
+      "tag": "investment_strategies_courses",
+      "patterns": ["Courses on investment strategies", "Learn investment strategies", "Best investment strategy courses", "Investing strategies course", "Advanced investment strategies", "Investment strategy training"],
+      "responses": ["You can learn effective investment strategies through 'Ultimate Investment Banking Course'."]
+    },
+    {
+      "tag": "wealth_management",
+      "patterns": ["Wealth management course ", "Learn wealth management", "Courses on wealth management", "Managing wealth", "Wealth management training", "Best wealth management course"],
+      "responses": ["'Financial Modeling for Business Analysts' includes wealth management concepts and is available on Udemy."]
+    },
+    {
+      "tag": "tax_courses",
+      "patterns": ["Taxation courses", "Tax management courses", "Courses on taxes", "How to manage taxes?", "Tax management training", "Best tax management course"],
+      "responses": ["The 'Complete GST Course & Certification' covers tax management and is available on Udemy."]
+    },
+    {
+      "tag": "excel_modeling",
+      "patterns": ["Excel modeling courses", "Financial modeling in Excel", "How to use Excel for modeling?", "Learn Excel financial modeling", "Best course for Excel modeling", "Excel modeling training"],
+      "responses": ["'Beginner to Pro - Financial Analysis in Excel' is perfect for mastering financial modeling in Excel."]
+    },
+    {
+      "tag": "gst_compliance",
+      "patterns": ["Courses on GST compliance", "Learn GST compliance", "What is GST compliance?", "GST compliance certification", "Best course for GST compliance", "GST compliance training"],
+      "responses": ["The 'Complete GST Course & Certification' includes everything you need to know about GST compliance."]
+    },
+    {
+      "tag": "financial_risk_management",
+      "patterns": ["Financial risk management course", "Learn risk management in finance", "Courses on financial risk", "Best course for financial risk management", "How to manage financial risks?", "Risk management finance course"],
+      "responses": ["You can learn financial risk management with 'Financial Modeling for Business Analysts'. Available on Udemy."]
+    },
+    {
+      "tag": "real_estate_investment",
+      "patterns": ["Courses on real estate investment", "Learn how to invest in real estate", "Real estate investing courses", "Best real estate investment course", "How to invest in real estate?", "Real estate investment training"],
+      "responses": ["'How To Maximize Your Profits Trading Options' touches on investment strategies, including real estate."]
+    },
+    {
+      "tag": "financial_analysis_for_business",
+      "patterns": ["Financial analysis for businesses", "Learn financial analysis for business", "Courses on financial analysis for businesses", "Business financial analysis", "Financial analysis in Excel for business", "Best course for financial analysis in business"],
+      "responses": ["'Beginner to Pro - Financial Analysis in Excel' is ideal for business financial analysis."]
+    },
+    {
+      "tag": "entrepreneurship_finance",
+      "patterns": ["Finance for entrepreneurs", "Courses for entrepreneurship finance", "Finance training for entrepreneurs", "Entrepreneur finance courses", "Finance courses for startup founders", "Best finance course for entrepreneurs"],
+      "responses": ["'Financial Modeling for Business Analysts' is perfect for entrepreneurs looking to improve their financial understanding."]
+    },
+    {
+      "tag": "small_business_finance",
+      "patterns": ["Finance for small businesses", "Small business finance courses", "Finance management for small businesses", "Courses on finance for small businesses", "How to manage small business finance?", "Finance courses for small businesses"],
+      "responses": ["Courses like 'Financial Modeling for Business Analysts' are helpful for small business finance management."]
+    },
+    {
+      "tag": "investment_fundamentals",
+      "patterns": ["Investment fundamentals courses", "Basic investment course", "Learn investment basics", "Investment 101", "Courses on basic investment", "Fundamentals of investing"],
+      "responses": ["'How To Maximize Your Profits Trading Options' is great for learning the fundamentals of investing."]
+    },
+    {
+      "tag": "options_trading",
+      "patterns": ["Courses on options trading", "Learn options trading", "Best options trading courses", "Trading options basics", "Options trading strategies", "Options trading training"],
+      "responses": ["The 'How To Maximize Your Profits Trading Options' course provides a comprehensive guide to trading options."]
+    },
+    {
+      "tag": "finance_for_managers",
+      "patterns": ["Finance for managers", "Courses for finance managers", "Finance management training", "Best courses for finance managers", "Financial analysis for managers", "Finance courses for management"],
+      "responses": ["'Financial Modeling for Business Analysts' is suitable for managers looking to improve their finance management skills."]
+    },
+    {
+      "tag": "global_finance_courses",
+      "patterns": ["Global finance courses", "Learn global finance", "Courses on international finance", "International financial management", "Global finance training", "Best courses for global finance"],
+      "responses": ["Courses like 'The Ultimate Investment Banking Course' cover aspects of global finance and are available on Udemy."]
+    },
+    {
+      "tag": "financial_instruments",
+      "patterns": ["Courses on financial instruments", " Learn financial instruments", "What are financial instruments?", "Training for financial instruments", "Best course for financial instruments", "Financial instruments basics"],
+      "responses": ["Courses such as 'How To Maximize Your Profits Trading Options' cover a variety of financial instruments."]
+    },
+    {
+      "tag": "retirement_planning",
+      "patterns": ["Retirement planning courses", "Learn retirement planning", "Best courses for retirement planning", "How to plan for retirement?", "Retirement planning training", "Finance courses for retirement planning"],
+      "responses": ["'Beginner to Pro - Financial Analysis in Excel' can help you with personal finance and retirement planning."]
+    },
+    {
+      "tag": "courses_offered",
+      "patterns": ["What courses are offered?", "List of available courses", "What are the courses available?", "Courses I can take", "Show me the courses", "All courses offered", "Available courses to enroll", "List of courses", "Courses provided", "Which courses are there?", "Can you list all the courses?", "Tell me the courses I can take", "What are the available courses?", "Courses on Udemy", "Offered courses", "Available courses for learning", "Can you show me the list of courses?", "What classes can I enroll in?", "What training is available?", "I want to know the courses offered"],
+      "responses": ["Here is a list of courses:\n1. Beginner to Pro - Financial Analysis in Excel\n2. Financial Modeling for Business Analysts\n3. How To Maximize Your Profits Trading Options\n4. Trading Penny Stocks: A Guide for All Levels\n5. Complete GST Course & Certification\n6. Ultimate Investment Banking Course\n7. The Complete SQL Bootcamp\n8. Python for Data Science and Machine Learning Bootcamp\n9. Data Science A-Z: Real-Life Data Science Exercises Included\n10. The Web Developer Bootcamp\n11. React Native - The Practical Guide [2023 Edition]\n12. iOS & Swift - The Complete iOS App Development Bootcamp\n13. Full-Stack Web Development with React\n14. Python and Django Full Stack Web Developer Bootcamp\n15. Android App Development Masterclass using Kotlin\n16. Machine Learning A-Z: Hands-On Python & R In Data Science\n17. The Data Science Course 2023: Complete Data Science Bootcamp\n18. Artificial Intelligence A-Z: Learn How To Build An AI\n19. The Complete JavaScript Course 2023: From Zero to Expert!\n20. Learn Python & Ethical Hacking From Scratch\n21. Complete Web Development Bootcamp\n22. Modern React with Redux\n23. Java Programming and Software Engineering Fundamentals\n24. Deep Learning A-Z: Hands-On Artificial Neural Networks\n25. Docker Mastery: with Kubernetes & Swarm\n26. The Complete Java Developer Course\n27. The Ultimate MySQL Bootcamp\n28. Vue JS - The Complete Guide (incl. Router & Composition API)\n29. Node.js, Express, MongoDB & More: The Complete Bootcamp 2023\n30. The Complete Ruby on Rails Developer Course\n31. Ethical Hacking from Scratch\n32. Advanced SQL for Data Scientists\n33. C# Basics for Beginners: Learn C# Fundamentals by Coding\n34. Python for Data Analysis: Data Wrangling with Pandas, NumPy, and Jupyter\n35. The Complete Android App Developer Bootcamp\n36. Cloud Computing for Beginners\n37. CompTIA Security+ Certification (SY0-601)\n38. Cyber Security for Beginners\n39. Microsoft Excel - Excel from Beginner to Advanced\n40. The Ultimate Drawing Course - Beginner to Advanced\n41. Graphic Design Bootcamp: Photoshop, Illustrator, InDesign\n42. The Complete Digital Marketing Course - 12 Courses in 1\n43. The Complete Personal Finance Course: Save, Protect, Make More\n44. Facebook Ads & Facebook Marketing Mastery 2023\n45. Cryptocurrency Investment Course 2023: Fund Your Retirement!\n46. Mastering TypeScript: A Comprehensive Guide\n47. The Complete Flutter Bootcamp: Zero to Hero in Flutter\n48. UX/UI Design Bootcamp\n49. Adobe Premiere Pro CC - Essentials Training Course\n50. The Complete Blender Creator: Learn 3D Modelling for Beginners\n51. The Complete App Design Course - UX, UI, and Design Thinking\n52. Mobile App Development with Flutter & Dart\n53. Master Excel: Learn All Essential Functions & Formulas\n54. Web Development with PHP & MySQL\n55. The Complete SQL Course for Beginners\n56. Learn and Understand C++\n57. Full Stack Web Development with Flask\n58. Learn Linux in 5 Days and Level Up Your Career\n59. Kubernetes for Developers: Core Concepts\n60. The Complete React Developer Course\n61. Blockchain A-Z: Learn How To Build Your First Blockchain\n62. React Native for Mobile Developers\n63. 2023 Complete Python Bootcamp : Go from Zero to Hero in Python\n64. The Complete Financial Analyst Course 2023\n65. Mastering Data Structures & Algorithms using C and C++\n66. The Complete Microsoft Power BI Bootcamp\n67. R Programming A-Z: R For Data Science With Real Exercises\n68. Complete Guide to Elasticsearch\n69. Professional Scrum Master (PSM I) Certification\n70. Salesforce Certification Training: Admin 201 and App Builder\n71. AWS Certified Solutions Architect – Associate\n72. Learn DevOps: The Complete Kubernetes Course\n73. Spring Framework 5: Beginner to Guru\n74. Docker for Developers: From Dev to Production\n75. Mastering Microservices with Java\n76. Front End Web Development with React\n77. The Complete SQL Bootcamp 2023 Edition\n78. JavaScript Web Projects: 20 Projects to Build Your Portfolio\n79. React - The Complete Guide (incl Hooks, React Router, Redux)\n80. Kubernetes for the Absolute Beginners\n81. The Complete iOS 15 App Development Bootcamp\n82. Masterclass in Web Development with Python and Flask\n83. Java Programming for Beginners\n84. Ultimate Google Ads Training 2023: Profit with Pay Per Click\n85. Adobe After Effects CC - Essentials Training Course\n86. Introduction to Game Development with Unity\n87. Become a Product Manager | Learn the Skills & Get the Job\n88. The Complete Ethical Hacking Bootcamp\n89. Learn Ethical Hacking From Scratch\n90. The Complete Python Developer in 2023: Zero to Mastery\n91. Web Scraping with Python: Master Data Collection Techniques\n92. Data Science and Machine Learning Bootcamp with R\n93. Python Programming Bootcamp 2023\n94. Learn Python Programming Master class\n95. Machine Learning with Python\n96. Become a React Developer with Projects\n97. The Complete Machine Learning Bootcamp\n98. C++ Programming from Beginner to Expert\n99. Computer Vision with OpenCV and Python\n100. The Complete Android App Developer Bootcamp\n101. Complete C# Masterclass\n102. Linux for Beginners\n103. Learn Data Science with Python\n104. C++ for Programmers\n105. Python for Financial Analysis and Algorithmic Trading\n106. Unity Game Development Build 2D & 3D Games\n107. The Complete Cryptocurrency Course: More than 5 Courses in 1\n108. Learn JavaScript and Node.js from Scratch\n109. The Complete Front-End Web Developer Bootcamp\n110. The Ultimate React Native Course\n111. Cyber Security Crash Course for Beginners\n112. Master Python by Building 100 Projects\n113. Web Developer Bootcamp\n114. Learn Python Programming\n115. Machine Learning with TensorFlow\n116. Software Testing Masterclass\n117 . The Ultimate Google Certified Educator Level 1 Bootcamp\n118. Learn Photoshop, Web Design & Profitable Freelancing\n119. Blockchain Development: Build Decentralized Applications\n120. Master Python for Data Science\n121. Learn Blockchain by Building Your Own in Python\n122. Amazon FBA - Complete Guide to Selling on Amazon\n123. Python 3: Deep Dive (Part 1 - Functional)\n124. React.js Frontend Web Development for Beginners\n125. Complete Web & Mobile Designer in 2023: UI/UX, Figma, +more\n126. Python Data Science and Machine Learning Bootcamp\n127. Web Development with HTML, CSS, and JavaScript\n128. Advanced Excel for Financial Modeling\n129. Android Development with Kotlin: Beginner to Advanced\n130. iOS App Development with Swift\n131. Java Masterclass\n132. Artificial Intelligence in Python\n133. Ultimate Python Bootcamp: Learn to Code with 50+ Projects\n134. CSS - The Complete Guide 2023 (incl. Flexbox, Grid & Sass)\n135. Data Structures and Algorithms: Deep Dive Using Java\n136. SQL & Database Design A-Z: Learn MS SQL Server + PostgreSQL\n137. iOS 14 App Development Bootcamp\n138. Become a WordPress Developer: Unlocking Power With Code\n139. Vue JS 3 - The Complete Guide (with Router, Vuex, Composition API)\n140. The Complete PHP Full Stack Web Developer Bootcamp\n141. Master Digital Marketing\n142. Full Stack Web Development with NodeJS, MongoDB, Express\n143. Learn AWS: The Complete Introduction to Amazon Web Services\n144. Full Stack JavaScript Developer Bootcamp\n145. Python for Beginners: Learn Python Programming\n146. Django Web Development with Python\n147. AWS Cloud Practitioner Certification\n148. Complete Kotlin Programming Masterclass\n149. Mastering React Native: Develop Your First App\n150. The Complete Oracle SQL Certification Course\n151. R Programming: Advanced Analytics In R For Data Science\n152. Machine Learning with Scikit-Learn\n153. Become a Data Analyst with Python\n154. Learn JavaScript by Building 7 Games\n155. Complete React Developer in 2023 (w/ Redux, Hooks, GraphQL)\n156. The Complete Vue JS 3 Developer Guide\n157. Python Bootcamp: Learn Python Programming\n158. Python & Django | Full Stack Web Development for Beginners\n159. Learning Web Development with Python and Flask\n160. Master Excel Pivot Tables\n161. The Complete Python and Django Developer Bootcamp\n162. Blockchain Development on Ethereum: Build Projects Using Solidity\n163. Data Science Bootcamp 2023 with Python & R\n164. Full Stack JavaScript: Learn to Build Web Apps Using Node.js\n165. Kotlin for Java Developers\n166. Complete Machine Learning & Data Science with Python\n167. iOS App Development with Swift 5\n168. Python Programming: Learn Python from Scratch\n169. Amazon Web Services (AWS) Certified Developer - Associate\n170. React Native: Build Real World Applications\n171. Master React and Redux\n172. C++: From Beginner to Expert\n173. Master Docker with Kubernetes\n174. Full-Stack JavaScript with Node and React\n175. Learn Python and Django Framework\n176. Learn to Build Web Apps with React and Redux\n177. Django Rest Framework with React\n178. Master Google Analytics\n179. Full Stack Web Development: HTML, CSS, JavaScript\n180. Learn VueJS 3: From Beginner to Advanced\n181. Become a Full Stack Web Developer\n182. SQL Bootcamp: MySQL and PostgreSQL for Beginners\n183. Python for Machine Learning & Data Science\n184. Learn Java Programming Step by Step\n185. Python and Django for Beginners\n186. Angular - The Complete Guide (2023 Edition)\n187. Data Science with Python\n188. SQL for Data Science with Python\n189. Learn to Code with Python 2023\n190. Python Programming for Data Science\n191. Complete Python Web Developer Bootcamp\n192. Blockchain Technology & Cryptocurrencies\n193. Flutter & Dart - The Complete Guide\n194. Web Scraping with Python\n195. JavaScript - The Complete Guide 2023 (Beginner + Advanced)\n196. Become a Python Developer\n197. Master Angular and Firebase\n198. Vue.js Front-End Development\n199. Python & Django | Web Development Framework\n200. Android App Development with Kotlin"]
+    }
+  ]
+}
