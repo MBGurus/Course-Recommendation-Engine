@@ -96,6 +96,43 @@ def train_and_evaluate(models, X_train, y_train, X_test, y_test):
     print(f'Best Model: {best_model.__class__.__name__} with score: {best_score}')
     return best_model
 
-best_model = train_and_evaluate(models, X_train, y_train, X_test, y_test)
+best_model = train_and_evaluate(models, X_train, y_train, X_test, y_corpus = " ".join(course_data['course_title'].astype(str))
 
+tokens = nltk.word_tokenize(corpus.lower())
+bigrams = ngrams(tokens, 2)
+trigrams = ngrams(tokens, 3)
 
+ngram_model = defaultdict(list)
+for w1, w2 in bigrams:
+    ngram_model[(w1,)].append(w2)
+for w1, w2, w3 in trigrams:
+    ngram_model[(w1, w2)].append(w3)
+
+def predict_next_word(input_text):
+
+    corrected_text = str(TextBlob(input_text).correct())
+    words_input = nltk.word_tokenize(corrected_text.lower())
+    
+    if len(words_input) >= 2:
+        last_two_words = tuple(words_input[-2:])
+        next_words_trigram = ngram_model.get(last_two_words, [])
+        if next_words_trigram:
+            valid_words = [word for word in next_words_trigram if word in word_list]
+            if valid_words:
+                return valid_words[:3] 
+    
+    if len(words_input) >= 1:
+        last_word = tuple(words_input[-1:])
+        next_words_bigram = ngram_model.get(last_word, [])
+        if next_words_bigram:
+            valid_words = [word for word in next_words_bigram if word in word_list]
+            if valid_words:
+                return valid_words[:3]  
+    
+    if len(words_input) > 0:
+        partial_word = words_input[-1]
+        suggestions = [word for word in word_list if word.startswith(partial_word)]
+        if suggestions:
+            return suggestions[:3]  
+    
+    return ["development", "programming", "design", "software"]
