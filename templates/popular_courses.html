@@ -1,1 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Courses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        li {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #1a73e8;
+            border-radius: 8px;
+            background-color: #e8f0fe;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        a {
+            font-weight: bold;
+            color: #1a73e8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        span {
+            color: #555;
+            display: block;
+        }
+
+        p {
+            color: #333;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: white;
+            padding: 0;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .btn:hover {
+            background-color: #155ab6;
+        }
+
+        .btn:focus {
+            outline: none;
+        }
+
+        @media (max-width: 600px) {
+            ul {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .btn {
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+            }
+        }
+
+        .buttons {
+            position: sticky;
+            bottom: 0;
+            background-color: #f4f4f4;
+            padding: 15px 0;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hey! These Courses Are Gaining Popularity, Maybe You Might Like Them!</h1>
+
+    {% if not courses.empty %}
+        <ul>
+            {% for course in courses.itertuples() %}
+                <li>
+                    <a href="{{ url_for('course_view', course_id=course.index) }}">{{ course.course_title }}</a>
+                    <span>Views: {{ course.views }}</span>
+                    <span>Last Viewed: {{ course.last_viewed }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No popular courses found at the moment. Please check back later!</p>
+    {% endif %}
+
+    <div class="buttons">
+        <a href="/" class="btn">Back to search tab</a>
+        <a href="/trending-courses" class="btn">Go to TSA</a>
+    </div>
+
+</body>
+</html>
