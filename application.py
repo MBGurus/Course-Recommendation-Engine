@@ -159,6 +159,7 @@ def recommend():
         filtered_courses_df = pd.DataFrame()  # Create an empty DataFrame
 
     return render_template('result.html', courses=filtered_courses_df)
+    
 complete_course_data = pd.read_csv('complete_course_data.csv')
 
 popular_courses = pd.DataFrame({
@@ -166,7 +167,6 @@ popular_courses = pd.DataFrame({
     'course_title': complete_course_data['course_title'],
     'last_viewed': pd.NA  
 })
-
 
 @app.route('/course/<int:course_id>')
 def course_view(course_id):
