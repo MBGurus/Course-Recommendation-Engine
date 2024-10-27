@@ -159,4 +159,53 @@ def recommend():
         filtered_courses_df = pd.DataFrame()  # Create an empty DataFrame
 
     return render_template('result.html', courses=filtered_courses_df)
+complete_course_data = pd.read_csv('complete_course_data.csv')
 
+popular_courses = pd.DataFrame({
+    'index': complete_course_data['index'],
+    'course_title': complete_course_data['course_title'],
+    'last_viewed': pd.NA  
+})
+
+
+@app.route('/course/<int:course_id>')
+def course_view(course_id):
+    course_data = pd.read_csv('complete_course_data.csv')
+    popular_courses = pd.read_csv('popular_courses.csv', sep=';')
+
+    if popular_courses['index'].duplicated().sum() > 0:
+        print("Duplicate indices found in popular courses. Resetting indices to make them unique.")
+        popular_courses = popular_courses.drop_duplicates(subset=['index'], keep='first')
+        popular_courses.to_csv('popular_courses.csv', sep=';', index=False) 
+
+    if course_id not in course_data['index'].values:
+        return "Course not found", 404
+
+    course_url = course_data.loc[course_data['index'] == course_id, 'url'].values[0]
+
+    if not is_valid_url(course_url):
+        return "Course link is invalid or no longer offered", 404
+
+
+    if course_id in popular_courses['index'].values:
+        popular_courses.loc[popular_courses['index'] == course_id, 'views'] += 1
+        popular_courses.loc[popular_courses['index'] == course_id, 'last_viewed'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    else:
+   
+        new_entry = pd.DataFrame({
+            'index': [course_id],
+            'views': [1],
+            'last_viewed': [datetime.now().strftime('%Y-%m-%d %H:%M:%S')]
+        })
+        popular_courses = pd.concat([popular_courses, new_entry], ignore_index=True)
+
+    popular_courses.to_csv('popular_courses.csv', sep=';', index=False)
+
+    return redirect(course_url)
+
+def is_valid_url(url):
+    try:
+        response = requests.head(url, allow_redirects=True)
+        return response.status_code == 200
+    except requests.RequestException:
+        return False
