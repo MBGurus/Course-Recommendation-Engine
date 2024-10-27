@@ -40,7 +40,27 @@ def preprocess_data(data):
     data['level'] = data['level'].str.strip()  
 
     return data
+course_data = preprocess_data(course_data)
 
+prolog = Prolog()
+
+def add_courses_to_prolog(data):
+    for index, row in data.iterrows():
+    
+        course_title = row['course_title'].replace("'", "\\'")
+        platform = row['platform'].replace("'", "\\'")
+        level = row['level'].replace("'", "\\'").capitalize()  
+        certification = row['certification'].replace("'", "\\'")
+        organization = row['organization'].replace("'", "\\'")
+        
+        course_fact = f"course('{course_title}', '{platform}', '{level}', '{certification}', '{organization}')"
+              
+        try:
+            prolog.assertz(course_fact)
+        except Exception as e:
+            print(f"Error asserting fact: {e}")
+
+add_courses_to_prolog(course_data)
 le_platform = LabelEncoder()
 le_level = LabelEncoder()
 le_certification = LabelEncoder()
