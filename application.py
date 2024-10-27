@@ -209,3 +209,33 @@ def is_valid_url(url):
         return response.status_code == 200
     except requests.RequestException:
         return False
+
+@app.route('/popular-courses')
+def popular_courses_page():
+    popular_courses = pd.read_csv('popular_courses.csv', sep=';')
+
+    if popular_courses['index'].duplicated().sum() > 0:
+        print("Duplicate indices found in popular courses. Resetting indices.")
+        popular_courses = popular_courses.drop_duplicates(subset=['index'], keep='first')
+        popular_courses.to_csv('popular_courses.csv', sep=';', index=False)  # Save back after fixing
+
+    viewed_courses = popular_courses[popular_courses['views'] > 0]
+
+    viewed_courses_sorted = viewed_courses.sort_values(by='views', ascending=False)
+
+    return render_template('popular_courses.html', courses=viewed_courses_sorted)
+
+def load_popular_courses():
+    return pd.read_csv('popular_courses.csv', sep=';')
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+@app.route('/result')
+def result():
+    return render_template('result.html')
+
+@app.route('/')
+def home():
+    return render_template('home.html'
