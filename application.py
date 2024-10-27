@@ -95,8 +95,9 @@ def train_and_evaluate(models, X_train, y_train, X_test, y_test):
     
     print(f'Best Model: {best_model.__class__.__name__} with score: {best_score}')
     return best_model
+best_model = train_and_evaluate(models, X_train, y_train, X_test, y_test)
 
-best_model = train_and_evaluate(models, X_train, y_train, X_test, y_corpus = " ".join(course_data['course_title'].astype(str))
+corpus = " ".join(course_data['course_title'].astype(str))
 
 tokens = nltk.word_tokenize(corpus.lower())
 bigrams = ngrams(tokens, 2)
@@ -136,3 +137,26 @@ def predict_next_word(input_text):
             return suggestions[:3]  
     
     return ["development", "programming", "design", "software"]
+
+@app.route('/predict_next_word', methods=['POST'])
+def predict_next():
+    data = request.get_json()
+    next_words = predict_next_word(data['text'])
+    return jsonify({'next_words': next_words})
+    
+@app.route('/recommend', methods=['POST'])
+def recommend():
+    preferences = request.form['preferences']
+    keywords = extract_keywords(preferences)
+    recommended_courses = find_matching_courses(keywords)
+
+    user_skill_level = request.form['skill_level']  
+    filtered_courses = filter_courses_by_skill_level(recommended_courses, user_skill_level)
+
+    if filtered_courses:  
+        filtered_courses_df = course_data[course_data['course_title'].isin(filtered_courses)]
+    else:
+        filtered_courses_df = pd.DataFrame()  # Create an empty DataFrame
+
+    return render_template('result.html', courses=filtered_courses_df)
+
