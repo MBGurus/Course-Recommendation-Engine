@@ -36,25 +36,21 @@ app = Flask(_name_)
 course_data = pd.read_csv("complete_course_data.csv")
 
 def preprocess_data(data):
-
     data['level'] = data['level'].str.strip()  
-
     return data
+    
 course_data = preprocess_data(course_data)
 
 prolog = Prolog()
-
 def add_courses_to_prolog(data):
     for index, row in data.iterrows():
-    
         course_title = row['course_title'].replace("'", "\\'")
         platform = row['platform'].replace("'", "\\'")
         level = row['level'].replace("'", "\\'").capitalize()  
         certification = row['certification'].replace("'", "\\'")
         organization = row['organization'].replace("'", "\\'")
         
-        course_fact = f"course('{course_title}', '{platform}', '{level}', '{certification}', '{organization}')"
-              
+        course_fact = f"course('{course_title}', '{platform}', '{level}', '{certification}', '{organization}')"      
         try:
             prolog.assertz(course_fact)
         except Exception as e:
@@ -351,7 +347,5 @@ def chat():
     else:
         return jsonify({"response": f"{bot_name}: I do not understand..."})
 
-
 if name == 'main':
     app.run(debug=True)
-
