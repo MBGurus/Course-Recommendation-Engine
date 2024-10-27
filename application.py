@@ -175,7 +175,49 @@ def recommend():
         filtered_courses_df = pd.DataFrame()  # Create an empty DataFrame
 
     return render_template('result.html', courses=filtered_courses_df)
+
+def extract_keywords(text):
+    stop_words = set(stopwords.words('english'))
+    words = word_tokenize(text.lower())
+    return [word for word in words if word.isalpha() and word not in stop_words]
+
+def find_matching_courses(keywords):
+    matching_courses = course_data[
+        course_data['course_title'].str.contains('|'.join(keywords), case=False, na=False) |
+        course_data['organization'].str.contains('|'.join(keywords), case=False, na=False)
+    ]
+    return matching_courses
+
+def filter_courses_by_skill_level(courses, skill_level):
+    print(f"Skill level from form: {skill_level}")
+
+    skill_level = skill_level.capitalize()
     
+    print(f"Capitalized skill level: {skill_level}")
+
+    prolog = Prolog()
+
+    prolog.assertz("filter_course('Beginner', Course) :- course(Course, _, 'Beginner', _, _)")
+    prolog.assertz("filter_course('Intermediate', Course) :- course(Course, _, 'Intermediate', _, _)")
+    prolog.assertz("filter_course('Expert', Course) :- course(Course, _, 'Expert', _, _)")
+
+    if skill_level == 'All':
+        return courses['course_title'].tolist()
+
+    filtered_courses = []
+    for course in courses['course_title']:
+        prolog_query = f"filter_course('{skill_level}', '{course}')"
+             
+        try:
+            result = list(prolog.query(prolog_query))
+            print(f"Query result for {course}: {result}") 
+            if result:  
+                filtered_courses.append(course)
+        except Exception as e:
+            print(f"Error executing query: {e}")
+
+    return filtered_courses
+
 complete_course_data = pd.read_csv('complete_course_data.csv')
 
 popular_courses = pd.DataFrame({
