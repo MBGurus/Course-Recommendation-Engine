@@ -238,4 +238,47 @@ def result():
 
 @app.route('/')
 def home():
-    return render_template('home.html'
+    return render_template('home.html')
+
+def trending_courses_analysis():
+    popular_courses = load_popular_courses()
+    
+    popular_courses = popular_courses[popular_courses['views'] > 0]
+    
+    if popular_courses.empty:
+        return "<p>No data available for trending courses.</p>"
+    
+    course_ids = popular_courses['index'].unique()
+    results = []
+
+    for course_id in course_ids:
+       
+        course_data = popular_courses[popular_courses['index'] == course_id]
+        
+        dates = pd.date_range(end=datetime.now(), periods=10).to_list()
+        views = np.random.poisson(lam=course_data['views'].values[0], size=10)
+        ts_data = pd.Series(views, index=dates)
+
+        model = ARIMA(ts_data, order=(1, 1, 1))
+        model_fit = model.fit()
+
+        forecast = model_fit.forecast(steps=5)
+        total_forecast = forecast.sum()
+
+        results.append((course_id, total_forecast))
+
+    results.sort(key=lambda x: x[1], reverse=True)
+
+    trending_html = "<ul>"
+    for course_id, predicted_views in results:
+
+        trending_html += f'<li><a href="/course/{course_id}">Course ID: {course_id}</a> - Predicted Views: {predicted_views:.2f}</li>'
+    trending_html += "</ul>"
+
+    return trending_html
+
+@app.route('/trending-courses')
+def trending_courses():
+    trending_html = trending_courses_analysis()
+    return render_template('trending_courses.html', trending_html=trending_html)
+
