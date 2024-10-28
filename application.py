@@ -35,13 +35,14 @@ app = Flask(_name_)
 
 course_data = pd.read_csv("complete_course_data.csv")
 
+#Apply preprocessing to the course data initially
 def preprocess_data(data):
     data['level'] = data['level'].str.strip()  
     return data
     
 course_data = preprocess_data(course_data)
-
 prolog = Prolog()
+#Populating a Prolog database with course information
 def add_courses_to_prolog(data):
     for index, row in data.iterrows():
         course_title = row['course_title'].replace("'", "\\'")
@@ -57,6 +58,7 @@ def add_courses_to_prolog(data):
             print(f"Error asserting fact: {e}")
 
 add_courses_to_prolog(course_data)
+
 le_platform = LabelEncoder()
 le_level = LabelEncoder()
 le_certification = LabelEncoder()
@@ -67,9 +69,12 @@ def preprocess_data(data):
     data['level_encoded'] = le_level.fit_transform(data['level'])
     data['certification_encoded'] = le_certification.fit_transform(data['certification'])
     
+    # Applies standard scaling to the encoded columns to normalize them
+    
     data[['platform_encoded', 'level_encoded', 'certification_encoded']] = scaler.fit_transform(
         data[['platform_encoded', 'level_encoded', 'certification_encoded']])
     
+      # Return the processed DataFrame
     return data
 
 course_data = preprocess_data(course_data)
@@ -87,6 +92,8 @@ models = {
     'Decision Tree': DecisionTreeClassifier(random_state=42),
     'Logistic Regression': LogisticRegression()
 }
+
+#trains and evaluates multiple machine learning models, and identifies the best-performing model based on cross-validation scores
 
 def train_and_evaluate(models, X_train, y_train, X_test, y_test):
     best_model = None
@@ -111,6 +118,7 @@ def train_and_evaluate(models, X_train, y_train, X_test, y_test):
     
     print(f'Best Model: {best_model.__class__.__name__} with score: {best_score}')
     return best_model
+
 best_model = train_and_evaluate(models, X_train, y_train, X_test, y_test)
 
 corpus = " ".join(course_data['course_title'].astype(str))
@@ -124,6 +132,8 @@ for w1, w2 in bigrams:
     ngram_model[(w1,)].append(w2)
 for w1, w2, w3 in trigrams:
     ngram_model[(w1, w2)].append(w3)
+    
+#attempts to predict the next word(s) based on the input text using n-grams and a word list for validation
 
 def predict_next_word(input_text):
 
@@ -137,6 +147,8 @@ def predict_next_word(input_text):
             valid_words = [word for word in next_words_trigram if word in word_list]
             if valid_words:
                 return valid_words[:3] 
+                
+    #predict the next word based on the last word in the input text by using a bigram model
     
     if len(words_input) >= 1:
         last_word = tuple(words_input[-1:])
@@ -145,6 +157,8 @@ def predict_next_word(input_text):
             valid_words = [word for word in next_words_bigram if word in word_list]
             if valid_words:
                 return valid_words[:3]  
+                
+  # provide autocomplete suggestions based on the last, partially typed word
     
     if len(words_input) > 0:
         partial_word = words_input[-1]
@@ -154,12 +168,16 @@ def predict_next_word(input_text):
     
     return ["development", "programming", "design", "software"]
 
+#defining a Flask route that handles HTTP POST requests to predict the next word based on input text
+
 @app.route('/predict_next_word', methods=['POST'])
 def predict_next():
     data = request.get_json()
     next_words = predict_next_word(data['text'])
     return jsonify({'next_words': next_words})
     
+    #defining a Flask route for recommending courses based on user preferences and skill level.
+
 @app.route('/recommend', methods=['POST'])
 def recommend():
     preferences = request.form['preferences']
@@ -175,11 +193,15 @@ def recommend():
         filtered_courses_df = pd.DataFrame()  # Create an empty DataFrame
 
     return render_template('result.html', courses=filtered_courses_df)
+    
+#analyzing a given text string and return a list of meaningful keywords while filtering out common, unimportant words
 
 def extract_keywords(text):
     stop_words = set(stopwords.words('english'))
     words = word_tokenize(text.lower())
     return [word for word in words if word.isalpha() and word not in stop_words]
+    
+#search for courses in a dataset that match a list of keywords, either in the course titles or the organizations offering those courses
 
 def find_matching_courses(keywords):
     matching_courses = course_data[
@@ -187,6 +209,8 @@ def find_matching_courses(keywords):
         course_data['organization'].str.contains('|'.join(keywords), case=False, na=False)
     ]
     return matching_courses
+
+#filtering a list of courses based on the specified skill level provided by the user
 
 def filter_courses_by_skill_level(courses, skill_level):
     print(f"Skill level from form: {skill_level}")
@@ -226,6 +250,8 @@ popular_courses = pd.DataFrame({
     'last_viewed': pd.NA  
 })
 
+#defining a Flask route and associated function for viewing details about a specific course based on its ID and also also handling loading course data, checking for duplicates in a popular courses dataset, and validating whether the requested course exists
+
 @app.route('/course/<int:course_id>')
 def course_view(course_id):
     course_data = pd.read_csv('complete_course_data.csv')
@@ -244,7 +270,7 @@ def course_view(course_id):
     if not is_valid_url(course_url):
         return "Course link is invalid or no longer offered", 404
 
-
+#updates the "popular courses" dataset based on user interactions with specific courses. It tracks views and the last viewed timestamp for each course and handles adding new courses if they haven't been previously recorded
     if course_id in popular_courses['index'].values:
         popular_courses.loc[popular_courses['index'] == course_id, 'views'] += 1
         popular_courses.loc[popular_courses['index'] == course_id, 'last_viewed'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -260,6 +286,8 @@ def course_view(course_id):
     popular_courses.to_csv('popular_courses.csv', sep=';', index=False)
 
     return redirect(course_url)
+    
+#check the validity of a given URL by sending an HTTP HEAD request to that URL
 
 def is_valid_url(url):
     try:
@@ -267,6 +295,8 @@ def is_valid_url(url):
         return response.status_code == 200
     except requests.RequestException:
         return False
+        
+#Flask route that serves a webpage displaying popular courses
 
 @app.route('/popular-courses')
 def popular_courses_page():
@@ -283,20 +313,30 @@ def popular_courses_page():
 
     return render_template('popular_courses.html', courses=viewed_courses_sorted)
 
+#reads and return the contents of a CSV file containing information about popular courses.
+
 def load_popular_courses():
     return pd.read_csv('popular_courses.csv', sep=';')
+
+#handler that serves as the entry point for the application, rendering the main index page
 
 @app.route('/index')
 def index():
     return render_template('index.html')
 
+#renders a results page
+
 @app.route('/result')
 def result():
     return render_template('result.html')
 
+#handler that serves the results page to the user
+
 @app.route('/')
 def home():
     return render_template('home.html')
+    
+#analyze and return information about trending courses based on their view counts
 
 def trending_courses_analysis():
     popular_courses = load_popular_courses()
@@ -309,6 +349,8 @@ def trending_courses_analysis():
     course_ids = popular_courses['index'].unique()
     results = []
 
+    #predicts the future views of courses using time series analysis
+    
     for course_id in course_ids:
        
         course_data = popular_courses[popular_courses['index'] == course_id]
@@ -335,10 +377,14 @@ def trending_courses_analysis():
 
     return trending_html
 
+#displays trending courses
+
 @app.route('/trending-courses')
 def trending_courses():
     trending_html = trending_courses_analysis()
     return render_template('trending_courses.html', trending_html=trending_html)
+
+#integrates a chatbot using PyTorch
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -365,6 +411,7 @@ bot_name = "ZEN"
 def chatb():
     return render_template('chatbot.html')
     
+#handles chatbot interactions.
 
 @app.route('/chat', methods=['POST'])
 def chat():
