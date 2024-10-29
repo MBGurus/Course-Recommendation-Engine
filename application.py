@@ -121,61 +121,42 @@ def train_and_evaluate(models, X_train, y_train, X_test, y_test):
 
 best_model = train_and_evaluate(models, X_train, y_train, X_test, y_test)
 
-corpus = " ".join(course_data['course_title'].astype(str))
+# Initialize N-gram model
+ngram_model = defaultdict(Counter)
 
+# Populate N-gram model from corpus data
+corpus = " ".join(course_data['course_title'].astype(str))
 tokens = nltk.word_tokenize(corpus.lower())
+
+# Build the bigrams and trigrams
 bigrams = ngrams(tokens, 2)
 trigrams = ngrams(tokens, 3)
 
-ngram_model = defaultdict(list)
 for w1, w2 in bigrams:
-    ngram_model[(w1,)].append(w2)
+    ngram_model[(w1,)][w2] += 1
 for w1, w2, w3 in trigrams:
-    ngram_model[(w1, w2)].append(w3)
-    
-#attempts to predict the next word(s) based on the input text using n-grams and a word list for validation
+    ngram_model[(w1, w2)][w3] += 1
 
-def predict_next_word(input_text):
+# Define function to predict next word
+def predict_next_word(ngram_model, prev_words, n=1):
+    prev_words = tuple(prev_words.lower().split())
+    if prev_words in ngram_model:
+        predicted_words = ngram_model[prev_words].most_common(n)
+        return [word for word, _ in predicted_words]
+    elif (prev_words[-1],) in ngram_model:
+        predicted_words = ngram_model[(prev_words[-1],)].most_common(n)
+        return [word for word, _ in predicted_words]
+    else:
+        return ["No prediction available"]
 
-    corrected_text = str(TextBlob(input_text).correct())
-    words_input = nltk.word_tokenize(corrected_text.lower())
-    
-    if len(words_input) >= 2:
-        last_two_words = tuple(words_input[-2:])
-        next_words_trigram = ngram_model.get(last_two_words, [])
-        if next_words_trigram:
-            valid_words = [word for word in next_words_trigram if word in word_list]
-            if valid_words:
-                return valid_words[:3] 
-                
-    #predict the next word based on the last word in the input text by using a bigram model
-    
-    if len(words_input) >= 1:
-        last_word = tuple(words_input[-1:])
-        next_words_bigram = ngram_model.get(last_word, [])
-        if next_words_bigram:
-            valid_words = [word for word in next_words_bigram if word in word_list]
-            if valid_words:
-                return valid_words[:3]  
-                
-  # provide autocomplete suggestions based on the last, partially typed word
-    
-    if len(words_input) > 0:
-        partial_word = words_input[-1]
-        suggestions = [word for word in word_list if word.startswith(partial_word)]
-        if suggestions:
-            return suggestions[:3]  
-    
-    return ["development", "programming", "design", "software"]
-
-#defining a Flask route that handles HTTP POST requests to predict the next word based on input text
-
+# API route to handle word prediction requests
 @app.route('/predict_next_word', methods=['POST'])
 def predict_next():
     data = request.get_json()
-    next_words = predict_next_word(data['text'])
-    return jsonify({'next_words': next_words})
-    
+    input_text = data.get('text', '')
+    suggestions = predict_next_word(ngram_model, input_text)
+    return jsonify({'next_words': suggestions})
+
     #defining a Flask route for recommending courses based on user preferences and skill level.
 
 @app.route('/recommend', methods=['POST'])
