@@ -124,6 +124,7 @@ def train_and_evaluate(models, X_train, y_train, X_test, y_test):
 
 best_model = train_and_evaluate(models, X_train, y_train, X_test, y_test)
 
+#Method for predicting the next words that the user might type
 # Initialize N-gram model
 ngram_model = defaultdict(Counter)
 
