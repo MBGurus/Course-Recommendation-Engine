@@ -28,8 +28,8 @@ import torch
 from model import Chat
 from nltk_utils import words, tokenize
 from nltk.corpus import words
-
-word_list = words.words()
+from collections import defaultdict, Counter
+from nltk.util import ngrams
 
 app = Flask(_name_)
 
@@ -84,6 +84,7 @@ y = course_data['organization']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
+#training and model initialization
 models = {
     'KNN': KNeighborsClassifier(),
     'Random Forest': RandomForestClassifier(n_estimators=50, random_state=0),
@@ -108,6 +109,8 @@ def train_and_evaluate(models, X_train, y_train, X_test, y_test):
         y_pred = model.predict(X_test)
         conf_matrix = confusion_matrix(y_test, y_pred)
         class_report = classification_report(y_test, y_pred)
+        
+        #evaluating models
         
         print(f'Confusion Matrix for {name}:\n{conf_matrix}')
         print(f'Classification Report for {name}:\n{class_report}')
